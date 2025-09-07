@@ -1,13 +1,9 @@
 import db from "../config/duckdb.js";
 
-export const getLocationData = (req, res) => {
-  const { latMin, latMax, lonMin, lonMax } = req.query;
-
+export const biogeochemical = (req, res) => {
   const query = `
-    SELECT *
+    SELECT date, oxygen, nitrate, chlorophyll, latitude, longitude, depth
     FROM 'data/argo_data.parquet'
-    WHERE latitude BETWEEN ${latMin} AND ${latMax}
-    AND longitude BETWEEN ${lonMin} AND ${lonMax}
     LIMIT 100
   `;
 
