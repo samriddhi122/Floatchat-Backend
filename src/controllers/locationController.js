@@ -13,6 +13,11 @@ export const getLocationData = (req, res) => {
 
   db.all(query, (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json({ data: rows });
+    // Convert BigInt → String
+    const safeRows = JSON.parse(
+      JSON.stringify(rows, (_, v) => (typeof v === "bigint" ? v.toString() : v))
+    );
+
+    res.json(safeRows);
   });
 };

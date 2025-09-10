@@ -30,7 +30,7 @@ app.get("/test", (req, res) => {
   res.send("backend working ...");
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
