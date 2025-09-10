@@ -1,6 +1,6 @@
 import db from "../config/duckdb.js";
 
-export const getTimeSeries = (req, res) => {
+export const getParameterData = (req, res) => {
   const { startDate, endDate } = req.query;
 
   const query = `
