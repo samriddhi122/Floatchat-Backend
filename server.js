@@ -2,17 +2,14 @@ import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
 import cors from "cors";
-
 import queryRoutes from "./src/routes/queryRoutes.js";
-
-dotenv.config();
 const app = express();
 
-
+dotenv.config();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 
 const limiter = rateLimit({
@@ -22,9 +19,8 @@ const limiter = rateLimit({
 });
 
 app.use(limiter); 
-
 // routes
-app.use("/query", queryRoutes);
+app.use("/", queryRoutes);
 
 app.get("/test", (req, res) => {
   res.send("backend working ...");
