@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import queryRoutes from "./src/routes/queryRoutes.js";
 const app = express();
+import { handleChat } from "./src/controllers/chatHandler.js";
 
 dotenv.config();
 app.use(cors());
@@ -22,9 +23,7 @@ app.use(limiter);
 // routes
 app.use("/", queryRoutes);
 
-app.get("/test", (req, res) => {
-  res.send("backend working ...");
-});
+app.post("/chat", handleChat);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
