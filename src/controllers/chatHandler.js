@@ -4,7 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 import { config as configDotenv } from "dotenv";
 configDotenv();
 
-import { systemPrompt } from "../utils/systemPrompt";
+import { systemPrompt } from "../utils/systemPrompt.js";
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY
@@ -15,7 +15,10 @@ export const handleChat =
 async (req, res)=>{
        try{
          
-         const chatHistory = req.body.chatHistory; 
+          
+           console.log(req.body);
+
+           const chatHistory = req.body.chatHistory; 
          if(!chatHistory)
             return res.send("Nothing is there"); 
 

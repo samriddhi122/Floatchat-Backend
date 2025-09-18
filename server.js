@@ -7,11 +7,17 @@ import queryRoutes from "./src/routes/queryRoutes.js";
 const app = express();
 import { handleChat } from "./src/controllers/chatHandler.js";
 
+
+
 dotenv.config();
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",  // only allow this origin
+  }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
+
+
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, 
@@ -21,7 +27,7 @@ const limiter = rateLimit({
 
 app.use(limiter); 
 // routes
-app.use("/", queryRoutes);
+// app.use("/", queryRoutes);
 
 app.post("/chat", handleChat);
 
