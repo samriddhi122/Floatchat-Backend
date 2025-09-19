@@ -16,13 +16,11 @@ async (req, res)=>{
        try{
          
           
-           console.log(req.body);
 
            const chatHistory = req.body.chatHistory; 
          if(!chatHistory)
             return res.send("Nothing is there"); 
 
-         console.log(systemPrompt); 
 
          const response = await ai.models.generateContent({
             model: "gemini-2.0-flash", 
@@ -47,7 +45,7 @@ async (req, res)=>{
        }
        catch(err)
        {
-          console.log(err); 
+      
           res.status(500).json({error: err.message});
        }
 };

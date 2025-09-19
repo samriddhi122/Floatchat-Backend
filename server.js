@@ -27,9 +27,10 @@ const limiter = rateLimit({
 
 app.use(limiter); 
 // routes
-// app.use("/", queryRoutes);
+app.use("/", queryRoutes);
 
-app.post("/chat", handleChat);
+
+// app.post("/chat", handleChat);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
