@@ -6,6 +6,7 @@ import cors from "cors";
 import queryRoutes from "./src/routes/queryRoutes.js";
 const app = express();
 import { handleChat } from "./src/controllers/chatHandler.js";
+import { connectDB } from "./src/config/database.js";
 
 
 
@@ -26,13 +27,17 @@ const limiter = rateLimit({
 });
 
 app.use(limiter); 
-// routes
+
 app.use("/", queryRoutes);
 
-
-// app.post("/chat", handleChat);
-
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+
+connectDB().then(() =>{
+  console.log("connected to the database");
+  
+  app.listen(PORT, () => {
+    console.log("backend is working fine on port 4000");
+  });
+}) .catch((err) =>{ 
+   console.log("error in connecting to the database", err); 
+})

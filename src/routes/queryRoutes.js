@@ -9,13 +9,13 @@ import { checkQuality } from "../controllers/qualityController.js";
 import { biogeochemical } from "../controllers/biogeochemicalController.js";
 import { explainConcept } from "../controllers/explainController.js";
 import { sendEmail } from "../controllers/sendEmail.js";
-
 import { uploadController } from "../controllers/uploadController.js";
-
+import {signUp} from "../controllers/signUp.js" ;
 
 const router = express.Router();
 const upload = multer(); 
 
+router.post("/signup" , signUp) ;
 router.post("/sendEmail" , sendEmail) ;
 router.get("/location", getLocationData);
 router.get("/time-series", getTimeSeries);
